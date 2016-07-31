@@ -12,7 +12,7 @@ public class ToolWindowRemote implements ToolWindowFactory {
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        
+
         toolWindow.getComponent().add(new JButton("TEST"));
     }
 }
