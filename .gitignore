@@ -57,6 +57,8 @@ Temporary Items
 ## Plugin-specific files:
 
 # IntelliJ
+.idea/
+*.iml
 /out/
 
 # mpeltonen/sbt-idea plugin
@@ -100,3 +102,16 @@ $RECYCLE.BIN/
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
+### Java template
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
