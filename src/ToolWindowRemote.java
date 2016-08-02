@@ -42,20 +42,26 @@ public class ToolWindowRemote implements ToolWindowFactory {
         toolWindow.getComponent().add(rootPanel);
     }
 
-    private static void adbConnect() {
+    private void adbConnect() {
         Utils.runCommand("adb connect 192.168.0.80");
         connectdCheck();
     }
 
-    private static void connectdCheck() {
+    private void connectdCheck() {
         try {
             Process p = Runtime.getRuntime().exec("adb devices");
             p.waitFor();
             String result = Utils.streamToString(p.getInputStream());
             String[] resultLines = result.split("\\r?\\n");
+            boolean connected=false;
             for (String line : resultLines) {
-                if(line.contains("\tdevice")) System.out.println(line.substring(0,line.indexOf("\t")));
+                if(line.contains("no device")|line.contains("offline"))continue;
+                    if(line.contains("\tdevice")){
+                    this.connectedText.setText("Connected to: "+line.substring(0,line.indexOf("\t")));
+                    connected=true;
+                }
             }
+            if(connected==false)this.connectedText.setText("Not connected");
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -73,5 +79,4 @@ public class ToolWindowRemote implements ToolWindowFactory {
         });
         return button;
     }
-
 }
