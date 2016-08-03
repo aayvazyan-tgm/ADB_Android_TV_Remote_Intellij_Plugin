@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin version="3">
   <id>com.github.aayvazyan</id>
   <name>Android TV Remote</name>
   <version>1.0</version>
