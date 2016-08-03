@@ -9,7 +9,7 @@
     ]]></description>
 
   <change-notes><![CDATA[
-     Release
+     Added a check if adb is correctly installed
     ]]>
   </change-notes>
 
