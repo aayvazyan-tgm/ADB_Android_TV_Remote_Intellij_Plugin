@@ -39,19 +39,25 @@ public class ToolWindowRemote implements ToolWindowFactory {
         extraRow1.add(generateActionButton(3, "Home"), BorderLayout.WEST);
 
         //Fill the content Panel
-        rootPanel.add(connectTo);
         rootPanel.add(connectedInfoText);
-        rootPanel.add(connectButton);
-        rootPanel.add(refreshButton);
 
-        rootPanel.add(controlsPanel);
-        rootPanel.add(extraRow1);
+        if (isADBInstalled()) {
+            rootPanel.add(connectTo);
+            rootPanel.add(connectButton);
+            rootPanel.add(refreshButton);
+
+            rootPanel.add(controlsPanel);
+            rootPanel.add(extraRow1);
+        } else {
+            //do not show controlls if adb is missing
+            connectedInfoText.setText("ADB is not in the path");
+        }
         //Add the content to the toolwindow
         toolWindow.getComponent().add(rootPanel);
     }
 
     private void adbConnect() {
-        Utils.runCommand("adb connect "+connectTo.getText());
+        Utils.runCommand("adb connect " + connectTo.getText());
         connectdCheck();
     }
 
@@ -80,4 +86,17 @@ public class ToolWindowRemote implements ToolWindowFactory {
         button.addActionListener(e -> Utils.runCommand("adb shell input keyevent " + androidKeyEventID));
         return button;
     }
+
+    private boolean isADBInstalled() {
+        try {
+            Process p = Runtime.getRuntime().exec("adb version");
+            p.waitFor();
+            String result = Utils.streamToString(p.getInputStream());
+            if(result.contains("Android Debug Bridge"))return true;
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
 }
