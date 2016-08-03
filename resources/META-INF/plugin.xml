@@ -2,7 +2,7 @@
   <id>com.github.aayvazyan</id>
   <name>Android TV Remote</name>
   <version>1.0</version>
-  <vendor email="ariay@live.at" url="https://github.com/aayvazyan-tgm">Github</vendor>
+  <vendor email="ariay@live.at" url="https://github.com/aayvazyan-tgm">Find me on Github</vendor>
 
   <description><![CDATA[
       This plugin adds a remote controler toolwindow to connect and remotely control your Android TV or other device.
